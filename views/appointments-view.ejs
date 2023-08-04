@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('./css/appointments-view-style'); %>
+<title>Patient Appointment Scheduler</title>    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<p>
+  <a href="/logout">Logout</a>
+</p> 
+<%# Display weather %>  
+<div class="topheader">
+<h1><%=getTemp%></h1>  
+<h2><%=dateToday%></h2>  
+<br/>
+<h3>Rogers Dental</h3>
+<h4>Rogers, Arkansas</h4>
+<br/>
+</div>
+<h5>
+<%# Display current hygienist %>
+<br/>
+<div class="date-hygienist">
+<label>Dental Hygienist:</label>
+<select>
+  <% for (let hygienist of hygienists) { %>
+      <% if (hygienist.hygienist_name === selectedHygienist) { %>
+        <option type="submit" name="hygienist_id" value='<%= hygienist.hygienist_id %>' 
+          selected="selected"><%= selectedHygienist %></option>       
+      <% } else { %>
+        <option value='<%= hygienist.hygienist_name %>'><%= hygienist.hygienist_name %></option> <% } %>
+  <% } %>
+</select>
+<p>
+  <%# Display appointment date %>
+  <label>Appointment Date:</label>  
+  <input type="date" name="date" id="date" value='<%=selectedDate%>'/>
+</p>
+</h5>
+</div>
+</head> 
+<%# Add appointments %>
+<button id="addbtn">Add New Appointment</button>
+<%# Show ADD appointment window %> 
+<div id="addModal" class="addmodal">
+<div class="modal-content">
+<span class="close">&times;</span>
+<%- include('./add-appointment-form'); %>
+</div>  
+</div>
+
+<%# Display list of appointments %>
+<body class="body">
+  <table width="90%" id="app">
+    <tr>
+        <th>Appointment Time</th>
+        <th>Patient's Name</th>
+        <th>Services</th>
+    </tr>
+    
+    <% for (let appointment of appointments) { %>
+    
+      <tr>  
+      <td width="15%"><%= appointment.time%></td>
+      <td width="25%"><%= appointment.patient_name%></td>
+      <td width="30%"><%= appointment.service%></td>
+      <form action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>' 
+            method='GET'>  
+        <td width="4%"><button type="submit">Edit</button></td>
+      </form>
+      <form action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>' 
+            method='POST' onSubmit="return confirm('Are you sure?') ">  
+      <td width="4%"><button type="submit" id="submit">Del</button></td>
+      </form>
+    </tr>
+    <% } %>
+  
+  </table>   
+</body>
+
+<script>
+
+  // Add appointment using vanilla javascript
+    let addmodal = document.getElementById("addModal");
+    let btn = document.getElementById("addbtn");
+    let span = document.getElementsByClassName("close")[0];
+    let addBtn = document.getElementById("addButton");
+   
+    btn.onclick = () => { addmodal.style.display = "block"; };
+    span.onclick = () => { addmodal.style.display = "none"; };
+    submitBtn.onclick = () => { addmodal.style.display = "none";};
+    
+    window.onclick = (event) => {
+      if (event.target == addmodal) {
+        addmodal.style.display = "block";
+      }
+    };
+
+</script>
+
+<script>
+  // edit appointment
+  let editmodal = document.getElementById("editModal");
+
+  let editspan = document.getElementsByClassName("editclose")[0];
+
+  editspan.onclick = () => { editmodal.style.display = "none"; };
+  submitBtn.onclick = () => { editmodal.style.display = "none"; };
+  
+  window.onclick = (event) => {
+    if (event.target == editmodal) {
+      editmodal.style.display = "block";
+    }
+  };
+</script>
+
+<%# Display Developer %>
+<footer>Jerry Galang - 2023 Backend Web Development</footer>
+</html>

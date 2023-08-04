@@ -1,0 +1,1 @@
+export const dateToday = new Date().toLocaleDateString();
