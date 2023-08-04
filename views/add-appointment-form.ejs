@@ -1,0 +1,33 @@
+<form action='/appointments/hygienist/:id' method='POST'>
+    Add New Appointment
+    <br><br><br>  
+    Appointment Time:
+    <br>
+    <input type="text" name="form_time"></input>
+    <br><br>
+    Patient's Name:
+    <br>
+    <select name="form_patient_id">
+    <% for (let patient of patients) { %>
+          <option value='<%= patient.patient_id %>' selected><%= patient.patient_name %></option>
+    <% } %>
+    </select>
+    <br><br>
+    Service:
+    <br>
+    <input type="text" name="form_service"></input>
+    <br><br>
+    Date:
+    <br>
+    <input type="date" name="form_date" value='<%= selectedDate %>'></input>
+    <br><br>
+    Hygienist:
+    <br>
+    <select name="form_hygienist_id">
+    <% for (let hygienist of hygienists) { %>  
+      <option value='<%= hygienist.hygienist_id %>' selected><%= hygienist.hygienist_name %></option>
+    <% } %>
+    </select> 
+    <br><br><br>
+    <button id="submit" type="submit">Submit</button>
+  </form>
