@@ -4,17 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style type="text/css">
+        label{
+            width: 100px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
 </head>
-<h1>Dental Hygienist Login</h1>
+<div class="text-center">
+<h4>Dental Hygienist Login</h4>
+</div>
 <body>
-    <form action="/login" method="post">
+    <div class="text-center">
+    <form style="max-width:600px;margin:auto;" action="/login" method="post">
     <p>
-        Dental Hygienist Name: <input type="text" name="username" id="username" /> 
+        <label>Hygienist Name:</label> <input type="text" name="username" id="username" /> 
     </p>
     <p>
-        Password: <input type="password" name="password" id="password" />
+        <label>Password:</label> <input type="password" name="password" id="password" />
     </p>
     <button type="submit">Login</button><a href="/register">Register</a>
     </form>
+    </div>
 </body>
 </html>
