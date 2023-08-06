@@ -7,9 +7,12 @@ export const hygienistUser = async (username, password, done) => {
   const user = dbResponse.rows[0];
   try {
     const isMatch = await bcrypt.compare(password, user.hygienist_password);
-    if (!isMatch) 
-        { return done(null, err) }
-    else { return done(null, user) };
+    if (!isMatch) {
+      return done(null, err) }
+    else { 
+      // hygienist name found in the database and passwords matched
+      return done(null, user) 
+    };
   
   } catch (err) {  }
   

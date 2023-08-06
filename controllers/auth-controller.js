@@ -1,5 +1,6 @@
 import passport from "passport";
 
+
 export const registrationPage = (req, res) => { 
     res.render("register"); 
 };
@@ -10,7 +11,8 @@ export const loginPage = (req, res) => {
 
 export const handleLogin = passport.authenticate('local', {
     failureRedirect: "/login",
-    successRedirect: "/appointments/hygienist/3/2023-10-23"
+    // load main page after login
+    successRedirect: "/appointments/hygienist" 
     }
 );
 

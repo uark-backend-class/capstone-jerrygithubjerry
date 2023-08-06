@@ -10,7 +10,14 @@
   <br><br><br>   
   Appointment Time:
   <br>
-  <input type="text" name="form_time" value="<%=currentAppt.time%>"/>
+  <select name="form_time">
+    <% for (let time of times) { %>
+        <% if (time.time === currentAppt.time) { %>
+          <option value='<%= currentAppt.time %>' selected><%= time.time %></option>
+        <% } else { %>
+          <option value='<%= time.time %>'><%= time.time %></option> <% } %>
+    <% } %>
+    </select>
   <br><br>
   Patient's Name:
   <br>
@@ -48,8 +55,7 @@
 
 <%- include('./appointments-view'); %>
 <script>
-
-  // edit appointment
+  // edit appointment modal window Vanilla Javascript
   let editmodal = document.getElementById("editModal");
  
   let editspan = document.getElementsByClassName("editclose")[0];

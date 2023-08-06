@@ -3,7 +3,11 @@
     <br><br><br>  
     Appointment Time:
     <br>
-    <input type="text" name="form_time"></input>
+    <select name="form_time">
+      <% for (let time of times) { %>
+            <option value='<%= time.time %>' selected><%= time.time %></option>
+      <% } %>
+      </select>
     <br><br>
     Patient's Name:
     <br>

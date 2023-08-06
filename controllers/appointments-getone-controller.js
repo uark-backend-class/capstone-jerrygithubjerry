@@ -31,8 +31,11 @@ export const getOneAppointment = async (req, res) => {
   
   const dbPatient = await db.query(`SELECT * FROM patients ORDER BY patient_name`);
   const patients = dbPatient.rows;
-  
-  res.render('edit-appointment-form',{appointments: appointments, hygienists: hygienists, patients: patients, 
+
+  const dbTime = await db.query(`SELECT * FROM times`);
+  const times = dbTime.rows;
+
+  res.render('edit-appointment-form',{appointments: appointments, hygienists: hygienists, patients: patients, times,
                                   selectedDate, selectedHygienist, getTemp, dateToday, currentAppt});
 };
 
