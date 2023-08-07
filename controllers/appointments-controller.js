@@ -18,8 +18,9 @@ export const getAllAppointments = async (req, res) => {
     AND appointments.date = $2 ORDER BY CAST(appointments.time AS time)`, [id, dateData]);
   
   const appointments = dbResponse.rows;
-  const selectedDate = dbResponse.rows[0].date;
-  const selectedHygienist = dbResponse.rows[0].hygienist_name;  
+  const selectedDate = dateData;
+  const dbselectedHygienist = await db.query (`SELECT * FROM hygienists WHERE hygienist_id = $1`,[id]);
+  const selectedHygienist = dbselectedHygienist.rows[0].hygienist_name;
   
   const dbHygienist = await db.query(`SELECT * FROM hygienists`);
   const hygienists = dbHygienist.rows;
@@ -30,5 +31,5 @@ export const getAllAppointments = async (req, res) => {
   const dbTimes = await db.query(`SELECT * FROM times`);
   const times = dbTimes.rows;
   
-  res.render('appointments-view',{appointments, hygienists, patients, times, selectedDate, selectedHygienist, getTemp, dateToday});
+  res.render('main-appointments-view',{appointments, hygienists, patients, times, selectedDate, selectedHygienist, getTemp, dateToday});
 };

@@ -8,6 +8,7 @@ import { deserializeHygienist, hygienistUser, serializeHygienist } from "./model
 
 const app = express();
 
+
 app.use(session({ secret: process.env.SECRET,
                   resave: false,
                   saveUninitialized: true,

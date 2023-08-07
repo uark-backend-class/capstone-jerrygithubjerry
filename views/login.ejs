@@ -14,12 +14,12 @@
 
 </head>
 <div class="text-center">
-<h4>Dental Hygienist Login</h4>'
+<h1>Hygienist Login</h1>
 <hr/>
 </div>
 <body>
     <div class="text-center">
-    <form style="max-width:600px;margin:auto;" action="/login" method="post">
+    <form style="max-width:600px; margin:auto;" action="/login" onsubmit="return isValidForm()" method="post">
     <p>
         <label>Hygienist Name:</label> <input type="text" name="username" id="username" /> 
     </p>
@@ -28,9 +28,11 @@
     </p>
     <button type="submit">Login</button>
     <br/>
+    <br/>
     <a href="/register">Register New Hygienist</a>
     <br/>
     </form>
     </div>
+
 </body>
 </html>

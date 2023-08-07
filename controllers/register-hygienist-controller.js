@@ -10,6 +10,7 @@ export const registerHygienist = async (req, res) => {
 
     if (dbResponse.rows.length === 0) {
         
+        // get salt+hash and integrate them into password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 

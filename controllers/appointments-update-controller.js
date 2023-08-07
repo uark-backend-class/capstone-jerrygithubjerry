@@ -8,11 +8,13 @@ export const updateAppointment = async (req, res) => {
   const f_service = req.body.form_service;
   const f_date = req.body.form_date;
   const f_hygienist_id = req.body.form_hygienist_id;
-  
-  const dbResponse = await db.query(`UPDATE appointments SET
+  try {
+    const dbResponse = await db.query(`UPDATE appointments SET
     hygienist_id = $1, patient_id = $2, date = $3, time = $4, service = $5 
     WHERE appointment_id = $6 RETURNING *`, [f_hygienist_id, f_patient_id, f_date, f_time, f_service, f_appt_id]);
-      
+  } catch (err) {
+    console.log('Duplicate or Invalid Appointment Entered!')
+  }
   res.redirect("/appointments/hygienist/" + f_hygienist_id + "/" + f_date);
 
 };

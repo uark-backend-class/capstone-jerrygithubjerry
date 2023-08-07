@@ -10,7 +10,7 @@ import { addAppointment } from "../controllers/appointments-add-controller.js";
 import { updateAppointment } from "../controllers/appointments-update-controller.js";
 import { deleteAppointment } from "../controllers/appointments-delete-controller.js";
 import { handleLogin, handleLogout, loginPage, registrationPage } from "../controllers/auth-controller.js";
-import { firstTimeLogin } from "../controllers/appointments-firstTimeLogin-controller.js";
+import { mainPageAfterLogin } from "../controllers/appointments-mainPageAfterLogin-controller.js";
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.get("/logout", handleLogout);
 router.use(isAuthenticated);
 router.use(setAuthLocals);
 
-router.get("/appointments/hygienist", firstTimeLogin);
+router.get("/appointments/hygienist", mainPageAfterLogin);
 router.get("/appointments/hygienist/:hygienist_id/:appointment_date", getAllAppointments);
 router.get("/appointments/hygienist/:hygienist_id/:appointment_date/:appointment_id", getOneAppointment);
 router.post("/appointments/hygienist/:id", addAppointment);

@@ -2,20 +2,22 @@ import db from "../db.js";
 import bcrypt from "bcrypt";
 
 export const hygienistUser = async (username, password, done) => { 
-  const dbResponse = await db.query('SELECT * FROM hygienists WHERE hygienist_name = $1', [ username ])
-  
-  const user = dbResponse.rows[0];
   try {
+  const dbResponse = await db.query('SELECT * FROM hygienists WHERE hygienist_name = $1', [ username ])
+  const user = dbResponse.rows[0];
+  if (!user) { console.log("Login failed!")}
+  if (user) {     
+    // compare entered password with hased DB password    
     const isMatch = await bcrypt.compare(password, user.hygienist_password);
-    if (!isMatch) {
-      return done(null, err) }
+    if (!isMatch) { console.log("Incorrect password!")}
+
     else { 
       // hygienist name found in the database and passwords matched
       return done(null, user) 
-    };
+    }
   
-  } catch (err) {  }
-  
+  } 
+  } catch (err) { console.log("Internal error"); }
 };
 
 export const serializeHygienist = (user, done) => {
