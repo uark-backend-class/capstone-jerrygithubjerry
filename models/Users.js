@@ -3,14 +3,16 @@ import bcrypt from "bcrypt";
 
 export const hygienistUser = async (username, password, done) => { 
   try {
+
   const dbResponse = await db.query('SELECT * FROM hygienists WHERE hygienist_name = $1', [ username ])
   const user = dbResponse.rows[0];
   if (!user) { console.log("Login failed!")}
   if (user) {     
     // compare entered password with hased DB password    
     const isMatch = await bcrypt.compare(password, user.hygienist_password);
-    if (!isMatch) { console.log("Incorrect password!")}
-
+    if (!isMatch) 
+        { console.log("Incorrect password!");}
+  
     else { 
       // hygienist name found in the database and passwords matched
       return done(null, user) 
@@ -31,5 +33,4 @@ export const deserializeHygienist = (hygienist_id, done) => {
       }
       done(err, user)
     });
-}
-
+};

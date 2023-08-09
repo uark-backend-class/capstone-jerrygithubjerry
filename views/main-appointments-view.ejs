@@ -21,28 +21,33 @@
 <h3>Rogers Dental</h3>
 <h4>Rogers, Arkansas</h4>
 </div>
+<!------------------------->
+<form action='/appointments/hygienist' method='POST'> 
 <h5>
 <%# Display current hygienist %>
+
 <br/>
 <div class="date-hygienist">
 <label>Dental Hygienist:</label>
-<select>
+<select onchange=this.form.submit() name="hygienist_id">
   <% for (let hygienist of hygienists) { %>
       <% if (hygienist.hygienist_name === selectedHygienist) { %>
-        <option type="submit" name="hygienist_id" value='<%= hygienist.hygienist_id %>' 
+        <option name="hygienist_id" value='<%= hygienist.hygienist_id %>' 
           selected="selected"><%= selectedHygienist %></option>       
       <% } else { %>
-        <option value='<%= hygienist.hygienist_name %>'><%= hygienist.hygienist_name %></option> <% } %>
+        <option value='<%= hygienist.hygienist_id %>'><%= hygienist.hygienist_name %></option> <% } %>
   <% } %>
 </select>
 <p>
   <%# Display appointment date %>
-  <label>Appointment Date:</label>  
-  <input type="date" name="date" id="date" value='<%=selectedDate%>'/>
+  <label>Appointment Date:</label> 
+  <input onchange=this.form.submit() type="date" name="appointment_date" id="appointment_date" value='<%=selectedDate%>'/>
 </p>
 </h5>
 </div>
 </head> 
+</form>
+<!--------------------------->
 <%# Add appointments %>
 <button id="addbtn">Add New Appointment</button>
 <%# Show ADD appointment window %> 
@@ -107,6 +112,10 @@
       }
     };
 
+    function myFunction(val) {
+  alert("The input value has changed. The new value is: " + val);
+  }
+
 </script>
 
 <script>
@@ -123,6 +132,7 @@
       editmodal.style.display = "block";
     }
   };
+
 </script>
 
 <%# Display Developer %>
