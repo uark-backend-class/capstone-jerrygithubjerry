@@ -8,7 +8,6 @@ import { deserializeHygienist, hygienistUser, serializeHygienist } from "./model
 
 const app = express();
 
-
 app.use(session({ secret: process.env.SECRET,
                   resave: false,
                   saveUninitialized: true,
@@ -29,3 +28,5 @@ app.use(router);
 app.listen(process.env.PORT, () => {
   console.log("Appointments API now listening on port 3000");
 });
+
+export default app;
