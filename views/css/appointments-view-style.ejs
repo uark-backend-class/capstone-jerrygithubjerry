@@ -1,130 +1,106 @@
 <style>
-.topheader h1 {            
-    font-size: 18px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    margin-left: 20px;
-    margin-top: -80px;
-}
-.topheader h2 {
-    font-size: 16px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    line-height: 5px;
-    margin-left: 20px;
-}
-.topheader2 h3 {
-    font-size: 35px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    text-align: center;         
-    line-height: 5px;
-}
-.topheader2 h4 {
-    font-size: 18px;
-    font-family: Verdana, Tahoma, sans-serif;
-    text-align: center;
-    line-height: 0px;           
-}
-
-.btn-text-right {
-    font-size: 16px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    text-align: right;
-    margin-right: 100px;
-}
-.date-hygienist {
-    font-size: 18px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    margin-left: 20px;
-    line-height: 0px;   
-}
-
-.date-hygienist select {
-    font-size: 18px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    margin-left: 20px;
-    line-height: 0px;  
-}
-
-.date-hygienist input {
-    font-size: 18px; 
-}
-
-.body
-{
-    margin-top: 100px;
-    margin-left: 60px;
-    margin-right: 60px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-.body button {
-    margin-left: 20px;
-    font-size: 16px;
-}
-.body table {
-    font-size: 16px;
-    margin-top: 30px;
-    margin-left: 20px;
-}
-
-th {
   
-    text-align: left;
-    padding: 8px;
-    line-height: 10px;
-} 
+    .btn-text-right {
+        font-size: 16px;
+        text-align: right;
+        margin-right: 160px;
+    }
+    .date-hygienist {
+        font-size: 18px;
+        margin-left: 30px;
+        line-height: 0px;   
+    }
+    
+    .date-hygienist select {
+        font-size: 18px;    
+        margin-left: 20px;
+        line-height: 0px;  
+    }
+    
+    .date-hygienist input {
+        font-size: 18px; 
+    }
+    
+    .body
+    {
+    
+        margin-left: 70px;
+        margin-right: 40px;
+   
+    }
+    .body button {
+        margin-left: 20px;
+        font-size: 16px;
+    }
+    .body table {
+        font-size: 16px;
+        margin-top: 30px;
+        margin-left: 20px;
+    }
+    
+    th {
+      
+        text-align: left;
+        padding: 8px;
+        line-height: 10px;
+    } 
+    
+    tr, td {
+        border: 1px solid black;
+        text-align: left;
+        padding: 6px;
+        line-height: 8px;
+    } 
+    tr:nth-child(even) {
+        background-color: lightgray;
+    }
+    
+    
+    .addmodal {
+        display: none; 
+        position: fixed; 
+        z-index: 2; 
+        padding-top: 100px; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: black; 
+        background-color: rgba(0,0,0,0.4); 
+    }
+    
+    .modal-content{
+        background-color: whitesmoke;
+        margin: auto;
+        border: 5px solid gray;
+        width: 400px;
+        height: 600px;
+        padding: 20px;
+    }
+    
+    .close {
+        color: black;
+        background-color: lightgray;
+        border: 2px solid gray;
+        margin-left: auto;
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+    
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    footer {
+        line-height: 100px;
+        margin-left: 20px;
+        font-size:  14px;
+    }
+    </style>
 
-tr, td {
-    border: 1px solid black;
-    text-align: left;
-    padding: 6px;
-    line-height: 8px;
-} 
-tr:nth-child(even) {
-    background-color: lightgray;
-}
-body {font-family: Georgia, 'Times New Roman', Times, serif}
-
-.addmodal {
-    display: none; 
-    position: fixed; 
-    z-index: 2; 
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: black; 
-    background-color: rgba(0,0,0,0.4); 
-}
-
-.modal-content{
-    background-color: whitesmoke;
-    margin: auto;
-    border: 5px solid gray;
-    width: 300px;
-    height: 400px;
-    padding: 30px;
-}
-
-.close {
-    color: black;
-    background-color: lightgray;
-    border: 2px solid gray;
-    float: right;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-footer {
-    line-height: 100px;
-    margin-left: 20px;
-    font-size:  14px;
-}
-</style>

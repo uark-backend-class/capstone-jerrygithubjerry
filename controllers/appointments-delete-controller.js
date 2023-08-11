@@ -1,6 +1,6 @@
 import db from "../db.js";
 
-export const deleteAppointment =  async (req, res) => {
+export const deleteAppointment = async (req, res) => {
 
   const deletedAppt = req.params
 
@@ -9,7 +9,7 @@ export const deleteAppointment =  async (req, res) => {
   if (dbResponse.rows.length <= 0) {
     res.status(404).send();
     return;
-  } 
+  }
 
   res.redirect("/appointments/hygienist/" + deletedAppt.hygienist_id + "/" + deletedAppt.appointment_date);
 

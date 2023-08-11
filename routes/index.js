@@ -24,12 +24,19 @@ router.get("/logout", handleLogout);
 router.use(isAuthenticated);
 router.use(setAuthLocals);
 
-router.get("/appointments/hygienist",mainPageAfterLogin);
+// appointment routes
+router.get("/appointments/hygienist", mainPageAfterLogin);
 router.post("/appointments/hygienist", mainPageAfterChange);
 router.get("/appointments/hygienist/:hygienist_id/:appointment_date", getAllAppointments);
 router.get("/appointments/hygienist/:hygienist_id/:appointment_date/:appointment_id", getOneAppointment);
 router.post("/appointments/hygienist/:id", addAppointment);
 router.post("/appointments/:id", updateAppointment);
 router.post("/appointments/hygienist/:hygienist_id/:appointment_date/:appointment_id", deleteAppointment);
+
+// patient routes
+// router.get("/patients/record", patientListPage);
+// router.get("/add-edit-patient", handleAddEditPatient);
+// router.post("edit-patient/:id", editPatientPage);
+// router.get("/delete-patient/:id", handleDeletePatient)
 
 export default router;
