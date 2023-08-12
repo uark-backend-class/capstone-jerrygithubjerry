@@ -12,6 +12,7 @@ import { deleteAppointment } from "../controllers/appointments-delete-controller
 import { handleLogin, handleLogout, loginPage, registrationPage } from "../controllers/auth-controller.js";
 import { mainPageAfterChange } from "../controllers/appointments-mainPageAfterChange-controller.js";
 import { mainPageAfterLogin } from "../controllers/appointments-mainPageAfterLogin-controller.js";
+import { getAllPatients } from "../controllers/patients-controller.js";
 
 const router = express.Router();
 
@@ -34,7 +35,7 @@ router.post("/appointments/:id", updateAppointment);
 router.post("/appointments/hygienist/:hygienist_id/:appointment_date/:appointment_id", deleteAppointment);
 
 // patient routes
-// router.get("/patients/record", patientListPage);
+router.get("/patients/record", getAllPatients);
 // router.get("/add-edit-patient", handleAddEditPatient);
 // router.post("edit-patient/:id", editPatientPage);
 // router.get("/delete-patient/:id", handleDeletePatient)

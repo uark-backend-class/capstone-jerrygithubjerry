@@ -17,12 +17,8 @@ export const registerHygienist = async (req, res) => {
         const dbAddHygienist = await db.query(`INSERT INTO 
             hygienists (hygienist_name, hygienist_password) 
             VALUES ($1, $2)`, [name, hashedPassword]);
-
-        res.redirect("/login");
-    }
-
-    else {
-        console.log("User already registered!")
-        res.redirect("/register");
+            res.redirect("/login");
+    } else { 
+            res.redirect("/register")
     }
 };

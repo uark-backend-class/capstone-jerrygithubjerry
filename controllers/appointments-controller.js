@@ -1,7 +1,5 @@
 import db from "../db.js";
 import 'dotenv/config';
-import { getTemp } from "../middleware/weather-middleware.js";
-import { dateToday } from "../middleware/dateToday-middleware.js";
 
 export const getAllAppointments = async (req, res) => {
 
@@ -31,5 +29,5 @@ export const getAllAppointments = async (req, res) => {
   const dbTimes = await db.query(`SELECT * FROM times`);
   const times = dbTimes.rows;
 
-  res.render('main-appointments-view', { appointments, hygienists, patients, times, selectedDate, selectedHygienist, getTemp, dateToday });
+  res.render('main-appointments-view', { appointments, hygienists, patients, times, selectedDate, selectedHygienist });
 };

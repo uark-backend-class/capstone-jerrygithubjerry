@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
     <title>Register New Hygienist</title>
     <%- include('./includes/head'); %>
     <div class="text-center">
@@ -11,10 +9,10 @@
 <body><div class="text-center">
     <form action="/register" method="post">
     <p>
-        <label>Hygienist Name</label><input type="text" name="username" id="username" /> 
+        <label>Hygienist Name:</label><input type="text" name="username" id="username" /> 
     </p>
     <p>
-       <label>Password</label><input type="password" name="password" id="password" />
+       <label>Password:</label><input type="password" name="password" id="password" />
     </p>
     <button type="submit">Register</button>
     <br/>
@@ -22,6 +20,7 @@
     <label>Already Registered?</label><a href="/login">Login Hygienist</a>
     <br/>
     </form>
-    </div>
+
+</div>
 </body>
 </html>

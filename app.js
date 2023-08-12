@@ -4,6 +4,7 @@ import 'dotenv/config';
 import router from "./routes/index.js";
 import session from "express-session";
 import LocalStrategy from "passport-local";
+import flash from "connect-flash";
 import { deserializeHygienist, hygienistUser, serializeHygienist } from "./models/Users.js";
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -31,3 +33,4 @@ app.listen(process.env.PORT, () => {
 });
 
 export default app;
+

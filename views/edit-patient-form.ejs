@@ -1,0 +1,46 @@
+<%- include('./css/edit-appointment-form-style'); %>
+
+<div id="editModal" class="editmodal">
+<div class="edit-modal-content">
+<span class="editclose">&times;</span>
+  
+<form action='/patients/record/:id' method='POST'>
+<input type="hidden" name="form_patient_id" value='<%= currentPatient.patient_id %>'/>
+ Edit Patient
+  <br><br><br>   
+    Patient's Name: (Last Name, First Name)
+    <br>
+    <input type="text" name="form_patient_name" value='<%= currentPatient.patient_name %>'></input>
+    <br><br>
+    Patient's Address: 
+    <br>
+    <input type="text" name="form_patient_address" value='<%= currentPatient.patient_address %>'></input>
+    <br><br>
+    Phone No:
+    <br>
+    <input type="text" name="form_patient_phone" value='<%= currentPatient.patient_phone %>'></input>
+    <br><br>
+    Insurance:
+    <br>
+    <input type="text" name="form_patient_insurance" value='<%= currentPatient.patient_insurance %>'></input>
+    <br><br><br>
+    <button id="submit" type="submit">Submit</button>
+</form>
+</div></div>
+
+<%- include('./main-patients-view'); %>
+<script>
+  // edit appointment modal window Vanilla Javascript
+  let editmodal = document.getElementById("editModal");
+ 
+  let editspan = document.getElementsByClassName("editclose")[0];
+
+  editspan.onclick = () => { editmodal.style.display = "none"; };
+  submitBtn.onclick = () => { editmodal.style.display = "none"; };
+  
+  window.onclick = (event) => {
+    if (event.target == editmodal) {
+      editmodal.style.display = "block";
+    }
+  };
+</script>

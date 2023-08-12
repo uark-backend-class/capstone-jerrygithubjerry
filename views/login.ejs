@@ -2,6 +2,8 @@
 <html lang="en">
 <title>Login Hygienist`</title>
 
+
+
 <%- include('./includes/head'); %>
 
 <div class="text-center">
@@ -24,8 +26,16 @@
     <a href="/register">Register New Hygienist</a>
     <br/>
     </form>
+    <br/>
+    <br/>
+    <div class="container"><div class="row"><div class="col-16">
+    <% if (messages && messages.length > 0 )  { %>    
+    <div class="alert alert-danger">
+            <%= messages[0] %> <% } %>
     </div>
-
+    </div></div></div>
+</div>
+   
 </body>
 </html>
 

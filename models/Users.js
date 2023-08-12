@@ -8,21 +8,21 @@ export const hygienistUser = async (username, password, done) => {
 
     const dbResponse = await db.query('SELECT * FROM hygienists WHERE hygienist_name = $1', [username])
     const user = dbResponse.rows[0];
-    if (!user) { console.log("Login failed!") }
+    if (!user) {return done(null, false, { message: "No name found, please try again." }); }
     if (user) {
       // compare entered password with hased DB password    
-      const isMatch = await bcrypt.compare(password, user.hygienist_password);
+      const isMatch = await bcrypt.compare(password, user.hygienist_password, function(err, isMatch) {
 
-      if (!isMatch) { console.log("Incorrect password!"); }
+      if (!isMatch) { return done(null, false, { message: "Incorrect password, please try again." }); }
 
       else {
         // hygienist name found in the database and passwords matched
         return done(null, user)
       }
 
-    }
-  } catch (err) { console.log("Internal error!") }
-};
+    })
+  } 
+}   catch (err) { ( err, { message: "Internal error, please try again." }) }  };
 
 export const serializeHygienist = (user, done) => {
   done(null, user.hygienist_id);

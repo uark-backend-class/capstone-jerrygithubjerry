@@ -7,13 +7,15 @@ export const registrationPage = (req, res) => {
 };
 
 export const loginPage = (req, res) => {
-    res.render("login", { getTemp, dateToday });
+    res.render("login", { messages: req.flash("error"), getTemp, dateToday });
 };
 
 export const handleLogin = passport.authenticate('local', {
     failureRedirect: "/login",
     // load main page after login
-    successRedirect: "/appointments/hygienist"
+    successRedirect: "/appointments/hygienist",
+    failureFlash: true,
+   
 }
 );
 
