@@ -1,129 +1,152 @@
+<%- include('./includes/head'); %>
+  <%- include('./css/appointments-view-style'); %>
+    <title>Patient Appointment Scheduler</title>
 
-  <%- include('./includes/head'); %>
-<%- include('./css/appointments-view-style'); %>
-<title>Patient Appointment Scheduler</title>    
+    <body class="body">
+      <div class="btn-text-right">
+        <form name="form1" method="get" action="/logout">
+          <button class="btn btn-primary" type="submit" name="logout">Logout</button>
+        </form>
+      </div>
+      <h4 class="text-center">Appointment Scheduling</h4>
+      <form action='/appointments/hygienist' method='POST'>
+        <h6>
+          <%# Display appointment date %>
+            Appointment schedule for:
+            <input onchange=this.form.submit() type="date" name="appointment_date" id="appointment_date"
+              value='<%=selectedDate%>' />
+            <br />
+            <br />
 
-<body class="body">
-<div class="btn-text-right">
-<form name="form1" method="get" action="/logout">
-  <button type="submit" name="logout">Logout</button>
-</form>
+            <%# Display current hygienist %>
 
-</div>
-<form action='/appointments/hygienist' method='POST'> 
-  <h6>
-    <%# Display appointment date %>
-    Appointment schedule for:
-    <input onchange=this.form.submit() type="date" name="appointment_date" id="appointment_date" value='<%=selectedDate%>'/>
-    <br/>
-    <br/>
-  
-    <%# Display current hygienist %>
-  
-  <br/>
-  <div class="date-hygienist">
-  Dental Hygienist: 
-  
-  <select onchange=this.form.submit() name="hygienist_id">
-    <% for (let hygienist of hygienists) { %>
-        <% if (hygienist.hygienist_name === selectedHygienist) { %>
-          <option name="hygienist_id" value='<%= hygienist.hygienist_id %>' 
-            selected="selected"><%= selectedHygienist %></option>       
-        <% } else { %>
-          <option value='<%= hygienist.hygienist_id %>'><%= hygienist.hygienist_name %></option> <% } %>
-    <% } %>
-  </select>
-  </h6>
-  </div>
+              <br />
+              <div class="date-hygienist">
+                Dental Hygienist:
 
-  </form>
-  
-  <%# Add appointments %>
-  <br/>
-  <button id="addbtn"> Add New Appointment </button><button id="patientbtn"> Access Patient Records </button>
-  
-  <%# Show ADD appointment window %> 
-  <div id="addModal" class="addmodal">
-  <div class="modal-content">
-  <span class="close">&times;</span>
-  <%- include('./add-appointment-form'); %>
-  </div>  
-  </div>
+                <select onchange=this.form.submit() name="hygienist_id">
+                  <% for (let hygienist of hygienists) { %>
+                    <% if (hygienist.hygienist_name===selectedHygienist) { %>
+                      <option name="hygienist_id" value='<%= hygienist.hygienist_id %>' selected="selected">
+                        <%= selectedHygienist %>
+                      </option>
+                      <% } else { %>
+                        <option value='<%= hygienist.hygienist_id %>'>
+                          <%= hygienist.hygienist_name %>
+                        </option>
+                        <% } %>
+                          <% } %>
+                </select>
+        </h6>
+        </div>
 
-  
-  <%# Display list of appointments %>
-  <body class="body">
-  
-  <!-----Start of Appointments Table----->
-  <table width="90%" id="app">
-    <tr>
-        <th>Appointment Time</th>
-        <th>Patient's Name</th>
-        <th>Services</th>
-    </tr>
-  
-    <% for (let appointment of appointments) { %>
-    
-      <tr>  
-      <td width="15%"><%= appointment.time%></td>
-      <td width="25%"><%= appointment.patient_name%></td>
-      <td width="30%"><%= appointment.service%></td>
-      <form action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>' 
-            method='GET'>  
-      <td width="4%"><button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-      </svg></button></td>
       </form>
-      <form action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>' 
-            method='POST' onSubmit="return confirm('Delete selected appointment, are you sure?') ">  
-      <td width="4%"><button type="submit" id="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-      </svg></button></td>
-      </form>
-      </tr>
-      <% } %>
-  </table>
-  <!-----End of Appointments Table----->
-  </body>
-  
-  <script>
-  
-    // Add appointment using vanilla javascript
-      let addmodal = document.getElementById("addModal");
-      let btn = document.getElementById("addbtn");
-      let span = document.getElementsByClassName("close")[0];
-      let addBtn = document.getElementById("addButton");
-     
-      btn.onclick = () => { addmodal.style.display = "block"; };
-      span.onclick = () => { addmodal.style.display = "none"; };
-      submitBtn.onclick = () => { addmodal.style.display = "none";};
-      
-      window.onclick = (event) => {
-        if (event.target == addmodal) {
-          addmodal.style.display = "block";
-        }
-      };
-  
-  </script>
-  
-  <script>
-    // edit appointment
-    let editmodal = document.getElementById("editModal");
-  
-    let editspan = document.getElementsByClassName("editclose")[0];
-  
-    editspan.onclick = () => { editmodal.style.display = "none"; };
-    submitBtn.onclick = () => { editmodal.style.display = "none"; };
-    
-    window.onclick = (event) => {
-      if (event.target == editmodal) {
-        editmodal.style.display = "block";
-      }
-    };
-  
-  </script>
-  
-  <%# Display Developer %>
-  <footer>Jerry Galang - 2023 Backend Web Development</footer>
-  </html>
+
+      <%# Add appointments %>
+        <br />
+        <button id="addbtn" class="btn btn-secondary"> Add New Appointment </button>
+
+        <%# Show ADD appointment window %>
+          <div id="addModal" class="addmodal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <%- include('./add-appointment-form'); %>
+            </div>
+          </div>
+
+
+          <%# Display list of appointments %>
+
+            <body class="body">
+
+              <!-----Start of Appointments Table----->
+              <table width="90%" id="app">
+                <tr>
+                  <th>Appointment Time</th>
+                  <th>Patient's Name</th>
+                  <th>Services</th>
+                </tr>
+
+                <% for (let appointment of appointments) { %>
+
+                  <tr>
+                    <td width="15%">
+                      <%= appointment.time%>
+                    </td>
+                    <td width="25%">
+                      <%= appointment.patient_name%>
+                    </td>
+                    <td width="30%">
+                      <%= appointment.service%>
+                    </td>
+                    <form
+                      action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>'
+                      method='GET'>
+                      <td width="4%"><button type="submit" class="btn btn-success"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path
+                              d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                          </svg></button></td>
+                    </form>
+                    <form
+                      action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>'
+                      method='POST' onSubmit="return confirm('Delete selected appointment, are you sure?') ">
+                      <td width="4%"><button type="submit" id="submit" class="btn btn-danger"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash" viewBox="0 0 16 16">
+                            <path
+                              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                            <path
+                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                          </svg></button></td>
+                    </form>
+                  </tr>
+                  <% } %>
+              </table>
+              <!-----End of Appointments Table----->
+            </body>
+            <br>
+            <p>
+            <form action='/patients/record' method='GET'>
+              <button id="patientbtn" class="btn btn-secondary"> Access Patient Records </button>
+            </form>
+            </p>
+            <script>
+              // Add appointment using javascript
+              let addmodal = document.getElementById("addModal");
+              let btn = document.getElementById("addbtn");
+              let span = document.getElementsByClassName("close")[0];
+              let addBtn = document.getElementById("addButton");
+
+              btn.onclick = () => { addmodal.style.display = "block"; };
+              span.onclick = () => { addmodal.style.display = "none"; };
+              submitBtn.onclick = () => { addmodal.style.display = "none"; };
+
+              window.onclick = (event) => {
+                if (event.target == addmodal) {
+                  addmodal.style.display = "block";
+                }
+              };
+            </script>
+            <script>
+              // edit appointment
+              let editmodal = document.getElementById("editModal");
+
+              let editspan = document.getElementsByClassName("editclose")[0];
+
+              editspan.onclick = () => { editmodal.style.display = "none"; };
+              submitBtn.onclick = () => { editmodal.style.display = "none"; };
+
+              window.onclick = (event) => {
+                if (event.target == editmodal) {
+                  editmodal.style.display = "block";
+                }
+              };
+
+            </script>
+
+            <%# Display Developer %>
+              <footer>Jerry Galang - 2023 Backend Web Development</footer>
+
+              </html>

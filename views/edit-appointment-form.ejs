@@ -1,71 +1,90 @@
 <%- include('./css/edit-appointment-form-style'); %>
 
-<div id="editModal" class="editmodal">
-<div class="edit-modal-content">
-<span class="editclose">&times;</span>
-  
-<form action='/appointments/:id' method='POST'>
-<input type="hidden" name="form_appt_id" value='<%= currentAppt.appointment_id %>'/>
- Edit Appointment
-  <br><br><br>   
-  Appointment Time:
-  <br>
-  <select name="form_time">
-    <% for (let time of times) { %>
-        <% if (time.time === currentAppt.time) { %>
-          <option value='<%= currentAppt.time %>' selected><%= time.time %></option>
-        <% } else { %>
-          <option value='<%= time.time %>'><%= time.time %></option> <% } %>
-    <% } %>
-    </select>
-  <br><br>
-  Patient's Name:
-  <br>
-  <select name="form_patient_id">
-  <% for (let patient of patients) { %>
-      <% if (patient.patient_id === currentAppt.patient_id) { %>
-        <option value='<%= currentAppt.patient_id %>' selected><%= patient.patient_name %></option>
-      <% } else { %>
-        <option value='<%= patient.patient_id %>'><%= patient.patient_name %></option> <% } %>
-  <% } %>
-  </select>
-  <br><br>
-  Service:
-  <br>
-  <input type="text" name="form_service" value='<%=currentAppt.service %>'></input>
-  <br><br>
-  Date:
-  <br>
-  <input type="date" name="form_date" value='<%= currentAppt.date %>'/>
-  <br><br>
-  Hygienist:
-  <br>
-  <select name="form_hygienist_id">
-    <% for (let hygienist of hygienists) { %>
-        <% if (hygienist.hygienist_id === currentAppt.hygienist_id) { %>
-          <option value='<%= currentAppt.hygienist_id %>' selected><%= hygienist.hygienist_name %></option>
-        <% } else { %>
-          <option value='<%= hygienist.hygienist_id %>'><%= hygienist.hygienist_name %></option> <% } %>
-    <% } %>
-  </select>
-  <br><br><br>
-  <button id="submit" type="submit">Update</button>
-</form>
-</div></div>
+  <div id="editModal" class="editmodal">
+    <div class="edit-modal-content">
+      <span class="editclose">&times;</span>
 
-<%- include('./main-appointments-view'); %>
-<script>
-  // edit appointment modal window Vanilla Javascript
-  let editmodal = document.getElementById("editModal");
- 
-  let editspan = document.getElementsByClassName("editclose")[0];
+      <form action='/appointments/:id' method='POST'>
+        <input type="hidden" name="form_appt_id" value='<%= currentAppt.appointment_id %>' />
+        Edit Appointment
+        <br><br>
+        Appointment Time:
+        <br>
+        <select class="form-control form-control-sm" name="form_time">
+          <% for (let time of times) { %>
+            <% if (time.time===currentAppt.time) { %>
+              <option value='<%= currentAppt.time %>' selected>
+                <%= time.time %>
+              </option>
+              <% } else { %>
+                <option value='<%= time.time %>'>
+                  <%= time.time %>
+                </option>
+                <% } %>
+                  <% } %>
+        </select>
+        <br>
+        Patient's Name:
+        <br>
+        <select class="form-control form-control-sm" name="form_patient_id">
+          <% for (let patient of patients) { %>
+            <% if (patient.patient_id===currentAppt.patient_id) { %>
+              <option value='<%= currentAppt.patient_id %>' selected>
+                <%= patient.patient_name %>
+              </option>
+              <% } else { %>
+                <option value='<%= patient.patient_id %>'>
+                  <%= patient.patient_name %>
+                </option>
+                <% } %>
+                  <% } %>
+        </select>
+        <br>
+        Service:
+        <br>
+        <input type="text" class="form-control form-control-sm" name="form_service"
+          value='<%=currentAppt.service %>'></input>
+        <br>
+        Date:
+        <br>
+        <input type="date" name="form_date" value='<%= currentAppt.date %>' />
+        <br><br>
+        Hygienist:
+        <br>
+        <select class="form-control form-control-sm" name="form_hygienist_id">
+          <% for (let hygienist of hygienists) { %>
+            <% if (hygienist.hygienist_id===currentAppt.hygienist_id) { %>
+              <option value='<%= currentAppt.hygienist_id %>' selected>
+                <%= hygienist.hygienist_name %>
+              </option>
+              <% } else { %>
+                <option value='<%= hygienist.hygienist_id %>'>
+                  <%= hygienist.hygienist_name %>
+                </option>
+                <% } %>
+                  <% } %>
+        </select>
+        <br><br>
+        <div class="text-center">
+          <button class="btn btn-md btn-secondary" id="submit" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-  editspan.onclick = () => { editmodal.style.display = "none"; };
-  submitBtn.onclick = () => { editmodal.style.display = "none"; };
-  
-  window.onclick = (event) => {
-    if (event.target == editmodal) {
-      editmodal.style.display = "block";
-    }
-  };
-</script>
+  <%- include('./main-appointments-view'); %>
+    <script>
+      // edit appointment modal window
+      let editmodal = document.getElementById("editModal");
+
+      let editspan = document.getElementsByClassName("editclose")[0];
+
+      editspan.onclick = () => { editmodal.style.display = "none"; };
+      submitBtn.onclick = () => { editmodal.style.display = "none"; };
+
+      window.onclick = (event) => {
+        if (event.target == editmodal) {
+          editmodal.style.display = "block";
+        }
+      };
+    </script>

@@ -1,0 +1,59 @@
+<%- include('./css/edit-patient-form-style'); %>
+
+  <div id="editModal" class="editmodal">
+    <div class="view-modal-content">
+      <span class="editclose">&times;</span>
+
+      <table width="95%">
+
+
+        <tr>
+          <label class="text-center"></label>Appointments for:</label>
+          <label class="text-center fw-bold">
+            <%= selectedPatient.patient_name%>
+          </label>
+          <br />
+          <th>Date</th>
+          <th>Time</th>
+          <th>Services</th>
+          <th>Hygienist</th>
+        </tr>
+
+        <% for (let appointment of selectedAppointments) { %>
+
+          <tr>
+            <td width="15%">
+              <%= appointment.date%>
+            </td>
+            <td width="15%">
+              <%= appointment.time%>
+            </td>
+            <td>
+              <%= appointment.service%>
+            </td>
+            <td width="15%">
+              <%= appointment.hygienist_name%>
+            </td>
+          </tr>
+          <% } %>
+      </table>
+
+    </div>
+  </div>
+
+  <%- include('./main-patients-view'); %>
+    <script>
+      // show all patient appointments modal window
+      let editmodal = document.getElementById("editModal");
+
+      let editspan = document.getElementsByClassName("editclose")[0];
+
+      editspan.onclick = () => { editmodal.style.display = "none"; };
+      submitBtn.onclick = () => { editmodal.style.display = "none"; };
+
+      window.onclick = (event) => {
+        if (event.target == editmodal) {
+          editmodal.style.display = "block";
+        }
+      };
+    </script>

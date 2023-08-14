@@ -1,5 +1,6 @@
 import db from "../db.js";
-import 'dotenv/config';
+import { getTemp } from "../middleware/weather-middleware.js";
+import { currentDate } from "../middleware/dateToday-middleware.js";
 
 export const getAllAppointments = async (req, res) => {
 
@@ -26,8 +27,8 @@ export const getAllAppointments = async (req, res) => {
   const dbPatient = await db.query(`SELECT * FROM patients ORDER BY patient_name`);
   const patients = dbPatient.rows;
 
-  const dbTimes = await db.query(`SELECT * FROM times`);
+  const dbTimes = await db.query(`SELECT * FROM times ORDER BY cast(times.time AS time)`);
   const times = dbTimes.rows;
 
-  res.render('main-appointments-view', { appointments, hygienists, patients, times, selectedDate, selectedHygienist });
+  res.render('main-appointments-view', { appointments, hygienists, patients, times, selectedDate, selectedHygienist, getTemp, currentDate });
 };

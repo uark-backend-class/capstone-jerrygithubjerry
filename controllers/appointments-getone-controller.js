@@ -1,7 +1,6 @@
 import db from "../db.js";
-import 'dotenv/config';
 import { getTemp } from "../middleware/weather-middleware.js";
-import { dateToday } from "../middleware/dateToday-middleware.js";
+import { currentDate } from "../middleware/dateToday-middleware.js";
 
 export const getOneAppointment = async (req, res) => {
 
@@ -37,7 +36,7 @@ export const getOneAppointment = async (req, res) => {
 
   res.render('edit-appointment-form', {
     appointments: appointments, hygienists: hygienists, patients: patients, times,
-    selectedDate, selectedHygienist, getTemp, dateToday, currentAppt
+    selectedDate, selectedHygienist, getTemp, currentDate, currentAppt
   });
 };
 

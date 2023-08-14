@@ -1,21 +1,25 @@
-<form action='/appointments/record' method='POST'>
-    Add New Patient
-    <br><br><br>     
-    Patient's Name: (Last Name, First Name)
-    <br>
-    <input type="text" name="form_patient_name"></input>
-    <br><br>
-    Patient's Address: 
-    <br>
-    <input type="text" name="form_patient_address"></input>
-    <br><br>
-    Phone No:
-    <br>
-    <input type="text" name="form_patient_phone"></input>
-    <br><br>
-    Insurance:
-    <br>
-    <input type="text" name="form_patient_insurance"></input>
-    <br><br><br>
-    <button id="submit" type="submit">Submit</button>
-  </form>
+<form action='/patients/record/add/:id' method='POST'>
+  Add New Patient
+  <br><br>
+  Patient's Name: (Last Name, First Name)
+  <br>
+  <input type="text" class="form-control form-control-sm" name="form_patient_name"></input>
+  <br>
+  Patient's Address:
+  <br>
+  <input type="text" class="form-control form-control-sm" name="form_patient_address"></input>
+  <br>
+  Phone No:
+  <br>
+  <input type="text" class="form-control form-control-sm " name="form_patient_phone"></input>
+  <br>
+  Insurance:
+  <br>
+
+  <input type="text" class="form-control form-control-sm" name="form_patient_insurance"></input>
+
+  <br><br>
+  <div class="text-center">
+    <button class="btn btn-lg btn-secondary" id="submit" type="submit">Submit</button>
+  </div>
+</form>

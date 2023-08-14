@@ -1,26 +1,29 @@
-    <title>Register New Hygienist</title>
-    <%- include('./includes/head'); %>
+<title>Register New Hygienist</title>
+<%- include('./includes/head'); %>
     <div class="text-center">
-    <p>
-    <h4>Register New Hygienist</h4>
-    </p>
+        <p>
+        <h4>Register New Hygienist</h4>
+        </p>
     </div>
-</div>
-<body><div class="text-center">
-    <form action="/register" method="post">
-    <p>
-        <label>Hygienist Name:</label><input type="text" name="username" id="username" /> 
-    </p>
-    <p>
-       <label>Password:</label><input type="password" name="password" id="password" />
-    </p>
-    <button type="submit">Register</button>
-    <br/>
-    <br/>
-    <label>Already Registered?</label><a href="/login">Login Hygienist</a>
-    <br/>
-    </form>
+    </div>
 
-</div>
-</body>
-</html>
+    <body>
+        <div class="text-center">
+            <form action="/register" method="post">
+                <p>
+                    <label>Hygienist Name:</label><input type="text" name="username" id="username" />
+                </p>
+                <p>
+                    <label>Password:</label><input type="password" name="password" id="password" />
+                </p>
+                <button class="btn btn-primary" type="submit">Register</button>
+                <br />
+                <br />
+                <label>Already Registered?</label><a href="/login">Login Hygienist</a>
+                <br />
+            </form>
+
+        </div>
+    </body>
+
+    </html>

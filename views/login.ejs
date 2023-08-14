@@ -2,40 +2,44 @@
 <html lang="en">
 <title>Login Hygienist`</title>
 
-
-
 <%- include('./includes/head'); %>
 
-<div class="text-center">
-<p>
-<h4>Hygienist Login</h4>
-</p>
-</div>
-<body>
     <div class="text-center">
-    <form action="/login" onsubmit="return isValidForm()" method="post">
-    <p>
-        <label>Hygienist Name:</label> <input type="text" name="username" id="username" /> 
-    </p>
-    <p>
-        <label>Password:</label> <input type="password" name="password" id="password" />
-    </p>
-    <button type="submit">Login</button>
-    <br/>
-    <br/>
-    <a href="/register">Register New Hygienist</a>
-    <br/>
-    </form>
-    <br/>
-    <br/>
-    <div class="container"><div class="row"><div class="col-16">
-    <% if (messages && messages.length > 0 )  { %>    
-    <div class="alert alert-danger">
-            <%= messages[0] %> <% } %>
+        <p>
+        <h4>Hygienist Login</h4>
+        </p>
     </div>
-    </div></div></div>
-</div>
-   
-</body>
-</html>
 
+    <body>
+        <div class="text-center">
+            <form action="/login" onsubmit="return isValidForm()" method="post">
+                <p>
+                    <label>Hygienist Name:</label> <input type="text" name="username" id="username" />
+                </p>
+                <p>
+                    <label>Password:</label> <input type="password" name="password" id="password" />
+                </p>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <br />
+                <br />
+                <a href="/register">Register New Hygienist</a>
+                <br />
+            </form>
+            <br />
+            <br />
+            <div class="container">
+                <div class="row">
+                    <div class="col-16">
+                        <% if (messages && messages.length> 0 ) { %>
+                            <div class="alert alert-danger">
+                                <%= messages[0] %>
+                                    <% } %>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>

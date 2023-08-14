@@ -5,10 +5,8 @@ export const getTemp = await axios.get(process.env.WEATHER_API_1 + process.env.Z
 
     (res) => {
 
-        const temp = `${res.data.main.temp}`;
+        const temp = `${Math.round(res.data.main.temp)}`;
         const weather = `${res.data.weather[0].description}`;
 
         return (`${temp} F ${weather}`);
     });
-
-

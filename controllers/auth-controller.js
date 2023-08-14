@@ -1,13 +1,13 @@
 import passport from "passport";
 import { getTemp } from "../middleware/weather-middleware.js";
-import { dateToday } from "../middleware/dateToday-middleware.js";
+import { currentDate } from "../middleware/dateToday-middleware.js";
 
 export const registrationPage = (req, res) => {
-    res.render("register", { getTemp, dateToday })
+    res.render("register", { getTemp, currentDate })
 };
 
 export const loginPage = (req, res) => {
-    res.render("login", { messages: req.flash("error"), getTemp, dateToday });
+    res.render("login", { messages: req.flash("error"), getTemp, currentDate });
 };
 
 export const handleLogin = passport.authenticate('local', {
