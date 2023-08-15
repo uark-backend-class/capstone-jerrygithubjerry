@@ -9,8 +9,8 @@ export const getOnePatient = async (req, res) => {
   const dbSelectedPatient = await db.query(`SELECT * FROM patients WHERE patients.patient_id = $1`, [id]);
   const currentPatient = dbSelectedPatient.rows[0];
 
-  const dbPatients = await db.query(`SELECT * FROM patients`);
+  const dbPatients = await db.query(`SELECT * FROM patients ORDER BY patients.patient_name`);
   const patients = dbPatients.rows;
 
-  res.render('edit-patient-form', { patients, currentPatient, getTemp, currentDate });
+  res.render('edit-patient-form', { messages: req.flash("info"), patients, currentPatient, getTemp, currentDate });
 };

@@ -1,12 +1,8 @@
 <%- include('./css/edit-patient-form-style'); %>
-
   <div id="editModal" class="editmodal">
     <div class="view-modal-content">
       <span class="editclose">&times;</span>
-
       <table width="95%">
-
-
         <tr>
           <label class="text-center"></label>Appointments for:</label>
           <label class="text-center fw-bold">
@@ -18,9 +14,7 @@
           <th>Services</th>
           <th>Hygienist</th>
         </tr>
-
         <% for (let appointment of selectedAppointments) { %>
-
           <tr>
             <td width="15%">
               <%= appointment.date%>
@@ -37,10 +31,8 @@
           </tr>
           <% } %>
       </table>
-
     </div>
   </div>
-
   <%- include('./main-patients-view'); %>
     <script>
       // show all patient appointments modal window

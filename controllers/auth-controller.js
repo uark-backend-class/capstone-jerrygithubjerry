@@ -3,7 +3,7 @@ import { getTemp } from "../middleware/weather-middleware.js";
 import { currentDate } from "../middleware/dateToday-middleware.js";
 
 export const registrationPage = (req, res) => {
-    res.render("register", { getTemp, currentDate })
+    res.render("register", { messages: req.flash("info"), getTemp, currentDate })
 };
 
 export const loginPage = (req, res) => {
@@ -15,8 +15,7 @@ export const handleLogin = passport.authenticate('local', {
     // load main page after login
     successRedirect: "/appointments/hygienist",
     failureFlash: true,
-   
-}
+    }
 );
 
 export const handleLogout = (req, res) => {

@@ -16,8 +16,12 @@ export const registerHygienist = async (req, res) => {
         const dbAddHygienist = await db.query(`INSERT INTO 
             hygienists (hygienist_name, hygienist_password) 
             VALUES ($1, $2)`, [name, hashedPassword]);
+        // not error
+        req.flash("error", "Hygienist name successfully added!")        
         res.redirect("/login");
     } else {
+        // error
+        req.flash("info", "Hygienist already exists, please enter new name.")
         res.redirect("/register")
     }
 };

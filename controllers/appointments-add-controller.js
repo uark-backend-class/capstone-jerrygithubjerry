@@ -7,15 +7,17 @@ export const addAppointment = async (req, res, next) => {
   const f_service = req.body.form_service;
   const f_date = req.body.form_date;
   const f_hygienist_id = req.body.form_hygienist_id;
+  const f_previous_hygienist_id = req.body.form_previous_hygienist_id;
+  const f_previous_date = req.body.form_previous_date;
+
   try {
     const dbAddResponse = await db.query(`INSERT INTO 
     appointments (hygienist_id, patient_id, date, time, service) 
     VALUES ($1, $2, $3, $4, $5)`, [f_hygienist_id, f_patient_id, f_date, f_time, f_service]);
-
   } catch (err) {
-    console.log('Duplicate or Invalid Appointment Entered!');
+    req.flash("info", "Conflict in schedule, appointment not saved!");
+    res.redirect("/appointments/hygienist/" + f_previous_hygienist_id + "/" + f_previous_date); 
+    return;   
   }
-
   res.redirect("/appointments/hygienist/" + f_hygienist_id + "/" + f_date);
-
 };

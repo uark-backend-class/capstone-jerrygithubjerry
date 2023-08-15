@@ -1,4 +1,3 @@
-<title>Register New Hygienist</title>
 <%- include('./includes/head'); %>
     <div class="text-center">
         <p>
@@ -21,9 +20,15 @@
                 <br />
                 <label>Already Registered?</label><a href="/login">Login Hygienist</a>
                 <br />
+                <% if (messages && messages.length> 0 ) { %>
+                    <input type="hidden" id="Message" value='<%= messages[0] %>'/>   
+                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
+                    <script>
+                           const input = document.getElementById("Message");
+                            swal(input.value)
+                    </script>
+                <% } %>
             </form>
-
         </div>
     </body>
-
     </html>

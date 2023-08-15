@@ -19,10 +19,12 @@ export const getOneAppointment = async (req, res) => {
 
   const dbSelectedAppt = await db.query(`SELECT * FROM appointments WHERE appointment_id = $1`, [selectedAppt])
   const currentAppt = dbSelectedAppt.rows[0];
+  const previousAppt = dbSelectedAppt.rows[0];
+  const previousDate = dateData;
+  const selectedDate = dateData;
 
   const appointments = dbResponse.rows;
-
-  const selectedDate = dbResponse.rows[0].date;
+  
   const selectedHygienist = dbResponse.rows[0].hygienist_name;
 
   const dbHygienist = await db.query(`SELECT * FROM hygienists`);
@@ -34,9 +36,9 @@ export const getOneAppointment = async (req, res) => {
   const dbTime = await db.query(`SELECT * FROM times`);
   const times = dbTime.rows;
 
-  res.render('edit-appointment-form', {
+  res.render('edit-appointment-form', {messages: req.flash("info"),
     appointments: appointments, hygienists: hygienists, patients: patients, times,
-    selectedDate, selectedHygienist, getTemp, currentDate, currentAppt
+    selectedDate, selectedHygienist, getTemp, currentDate, previousDate, currentAppt, previousAppt
   });
 };
 

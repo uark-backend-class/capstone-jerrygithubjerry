@@ -13,8 +13,8 @@ export const getAllPatientAppointments = async (req, res) => {
   const dbSelectedPatient = await db.query(`SELECT * FROM patients WHERE patients.patient_id = $1`, [id]);
   const selectedPatient = dbSelectedPatient.rows[0];
 
-  const dbPatients = await db.query(`SELECT * FROM patients`);
+  const dbPatients = await db.query(`SELECT * FROM patients ORDER BY patients.patient_name`);
   const patients = dbPatients.rows;
 
-  res.render('viewAll-patient-appointments-form', { patients, selectedPatient, selectedAppointments, getTemp, currentDate });
+  res.render('viewAll-patient-appointments-form', {messages: req.flash("info"), patients, selectedPatient, selectedAppointments, getTemp, currentDate });
 };

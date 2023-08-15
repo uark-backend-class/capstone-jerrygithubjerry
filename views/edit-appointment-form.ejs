@@ -6,6 +6,10 @@
 
       <form action='/appointments/:id' method='POST'>
         <input type="hidden" name="form_appt_id" value='<%= currentAppt.appointment_id %>' />
+          <!------Previous Data ------->
+          <input type="hidden" name="form_previous_hygienist_id" value='<%= previousAppt.hygienist_id %>' />
+          <input type="hidden" name="form_previous_date" value='<%= previousAppt.date %>' />
+          <!--------------------------->
         Edit Appointment
         <br><br>
         Appointment Time:
@@ -47,7 +51,7 @@
         <br>
         Date:
         <br>
-        <input type="date" name="form_date" value='<%= currentAppt.date %>' />
+        <input type="date" name="form_date" value='<%= previousDate %>' />
         <br><br>
         Hygienist:
         <br>

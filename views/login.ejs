@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<title>Login Hygienist`</title>
-
 <%- include('./includes/head'); %>
 
     <div class="text-center">
@@ -23,23 +19,17 @@
                 <br />
                 <br />
                 <a href="/register">Register New Hygienist</a>
-                <br />
+                <br />   
+                <% if (messages && messages.length> 0 ) { %>
+                    <input type="hidden" id="Message" value='<%= messages[0] %>'/>   
+                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
+                    <script>
+                           const input = document.getElementById("Message");
+                            swal(input.value)
+                    </script>
+                <% } %>
             </form>
-            <br />
-            <br />
-            <div class="container">
-                <div class="row">
-                    <div class="col-16">
-                        <% if (messages && messages.length> 0 ) { %>
-                            <div class="alert alert-danger">
-                                <%= messages[0] %>
-                                    <% } %>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        </div>                  
+    </div>
     </body>
-
-</html>
+    </html>

@@ -1,5 +1,9 @@
 <form action='/appointments/hygienist/:id' method='POST'>
-  Add New Appointment
+<!------Previous Data ------->
+<input type="hidden" name="form_previous_hygienist_id" value='<%= previousAppt.hygienist_id %>' />
+<input type="hidden" name="form_previous_date" value='<%= previousDate %>' />
+<!--------------------------->
+Add New Appointment
   <br><br>
   Appointment Time:
   <br>
@@ -32,12 +36,18 @@
   <br>
   Hygienist:
   <br>
-  <select name="form_hygienist_id" class="form-control form-control-sm">
+  <select class="form-control form-control-sm" name="form_hygienist_id">
     <% for (let hygienist of hygienists) { %>
-      <option value='<%= hygienist.hygienist_id %>' selected>
-        <%= hygienist.hygienist_name %>
-      </option>
-      <% } %>
+      <% if (hygienist.hygienist_id===currentAppt.hygienist_id) { %>
+        <option value='<%= currentAppt.hygienist_id %>' selected>
+          <%= hygienist.hygienist_name %>
+        </option>
+        <% } else { %>
+          <option value='<%= hygienist.hygienist_id %>'>
+            <%= hygienist.hygienist_name %>
+          </option>
+          <% } %>
+            <% } %>
   </select>
   <br><br>
   <div class="text-center">

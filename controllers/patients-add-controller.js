@@ -13,7 +13,7 @@ export const addPatient = async (req, res, next) => {
     VALUES ($1, $2, $3, $4)`, [name, address, phone, insurance]);
 
   } catch (err) {
-    console.log('Duplicate or Invalid Patient Entered!');
+    req.flash("info", err.toString('utf8'));
   }
 
   res.redirect("/patients/record");

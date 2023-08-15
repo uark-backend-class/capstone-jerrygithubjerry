@@ -82,7 +82,7 @@
                     <form
                       action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>'
                       method='GET'>
-                      <td width="4%"><button type="submit" class="btn btn-success"><svg
+                      <td width="4%"><button type="submit" class="btn btn-warning"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-pencil" viewBox="0 0 16 16">
                             <path
@@ -112,6 +112,15 @@
               <button id="patientbtn" class="btn btn-secondary"> Access Patient Records </button>
             </form>
             </p>
+            <% if (messages && messages.length> 0 ) { %>
+              <input type="hidden" id="Message" value='<%= messages[0] %>'/>   
+               <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
+              <script>
+                     const input = document.getElementById("Message");
+                      swal(input.value)
+              </script>
+            <% } %>
+
             <script>
               // Add appointment using javascript
               let addmodal = document.getElementById("addModal");
@@ -145,7 +154,7 @@
               };
 
             </script>
-
+     
             <%# Display Developer %>
               <footer>Jerry Galang - 2023 Backend Web Development</footer>
 
