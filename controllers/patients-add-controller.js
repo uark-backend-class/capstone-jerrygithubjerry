@@ -13,7 +13,7 @@ export const addPatient = async (req, res, next) => {
     VALUES ($1, $2, $3, $4)`, [name, address, phone, insurance]);
 
   } catch (err) {
-    req.flash("info", err.toString('utf8'));
+    req.flash("info", "Patient already exists!");
   }
 
   res.redirect("/patients/record");

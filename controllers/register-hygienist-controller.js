@@ -17,8 +17,8 @@ export const registerHygienist = async (req, res) => {
             hygienists (hygienist_name, hygienist_password) 
             VALUES ($1, $2)`, [name, hashedPassword]);
         // not error
-        req.flash("error", "Hygienist name successfully added!")        
-        res.redirect("/login");
+        req.flash("info", "Hygienist name successfully added!")        
+        res.redirect("/register");
     } else {
         // error
         req.flash("info", "Hygienist already exists, please enter new name.")
