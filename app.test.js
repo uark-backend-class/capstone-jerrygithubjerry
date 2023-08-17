@@ -38,8 +38,8 @@ describe("Protected routes", () => {
         const response = await agent.post("/login")
             .type("form")
             .send({
-                username: "test",
-                password: "abc123"
+                username: "xxxxxx", // username and password will be replaced during test
+                password: "xxxxxx"
             })
             .expect(302);
         expect(response.header.location).toBe("/appointments/hygienist");
