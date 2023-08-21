@@ -1,7 +1,6 @@
 <%- include('./includes/head'); %>
   <%- include('./css/appointments-view-style'); %>
     <title>Patient Appointment Scheduler</title>
-
     <body class="body">
       <div class="btn-text-right">
         <form name="form1" method="get" action="/logout">
@@ -17,13 +16,10 @@
               value='<%=selectedDate%>' />
             <br />
             <br />
-
             <%# Display current hygienist %>
-
               <br />
               <div class="date-hygienist">
                 Dental Hygienist:
-
                 <select onchange=this.form.submit() name="hygienist_id">
                   <% for (let hygienist of hygienists) { %>
                     <% if (hygienist.hygienist_name===selectedHygienist) { %>
@@ -39,13 +35,10 @@
                 </select>
         </h6>
         </div>
-
       </form>
-
       <%# Add appointments %>
         <br />
         <button id="addbtn" class="btn btn-secondary"> Add New Appointment </button>
-
         <%# Show ADD appointment window %>
           <div id="addModal" class="addmodal">
             <div class="modal-content">
@@ -53,12 +46,9 @@
               <%- include('./add-appointment-form'); %>
             </div>
           </div>
-
-
           <%# Display list of appointments %>
 
             <body class="body">
-
               <!-----Start of Appointments Table----->
               <table width="90%" id="app">
                 <tr>
@@ -66,9 +56,7 @@
                   <th>Patient's Name</th>
                   <th>Services</th>
                 </tr>
-
                 <% for (let appointment of appointments) { %>
-
                   <tr>
                     <td width="15%">
                       <%= appointment.time%>
@@ -76,9 +64,31 @@
                     <td width="25%">
                       <%= appointment.patient_name%>
                     </td>
+                              
                     <td width="30%">
                       <%= appointment.service%>
                     </td>
+                    <form action='/appointments/hygienist/notify/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>'
+                      method="POST" onSubmit="return confirm('Are ypu sure you want to send notification?')">
+                      <td width="4%">          
+                          <% if (appointment.notified===false) { %>
+                            <input type="hidden" name="form_updated" value="<%=appointment.updated%>"/>
+                            <input type="hidden" name="form_patient_email" value="<%=appointment.patient_email%>"/>
+                            <input type="hidden" name="form_time" value="<%= appointment.time%>"/>
+                            <input type="hidden" name="form_patient_name" value="<%= appointment.patient_name%>"/>
+                            <input type="hidden" name="form_patient_service" value="<%= appointment.service%>"/>
+                            <button type="submit"  name="notified" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+                              <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
+                              <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+                            </svg>
+                          <% } else { %>
+                            <button disabled="disabled"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+                              <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
+                              <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+                            </svg>
+                        <% } %> 
+                      </td>
+                    </form></button>
                     <form
                       action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>'
                       method='GET'>
@@ -90,7 +100,7 @@
                           </svg></button></td>
                     </form>
                     <form
-                      action='/appointments/hygienist/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>'
+                      action='/appointments/hygienist/delete/<%=appointment.hygienist_id%>/<%=appointment.date%>/<%=appointment.appointment_id%>'
                       method='POST' onSubmit="return confirm('Delete selected appointment, are you sure?') ">
                       <td width="4%"><button type="submit" id="submit" class="btn btn-danger"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -113,49 +123,44 @@
             </form>
             </p>
             <% if (messages && messages.length> 0 ) { %>
-              <input type="hidden" id="Message" value='<%= messages[0] %>'/>   
-               <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
+              <input type="hidden" id="Message" value='<%= messages[0] %>' />
+              <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
               <script>
-                     const input = document.getElementById("Message");
-                      swal(input.value)
+                const input = document.getElementById("Message");
+                swal(input.value)
               </script>
-            <% } %>
+              <% } %>
+                <script>
+                  // Add appointment using javascript
+                  let addmodal = document.getElementById("addModal");
+                  let btn = document.getElementById("addbtn");
+                  let span = document.getElementsByClassName("close")[0];
+                  let addBtn = document.getElementById("addButton");
 
-            <script>
-              // Add appointment using javascript
-              let addmodal = document.getElementById("addModal");
-              let btn = document.getElementById("addbtn");
-              let span = document.getElementsByClassName("close")[0];
-              let addBtn = document.getElementById("addButton");
+                  btn.onclick = () => { addmodal.style.display = "block"; };
+                  span.onclick = () => { addmodal.style.display = "none"; };
+                  submitBtn.onclick = () => { addmodal.style.display = "none"; };
 
-              btn.onclick = () => { addmodal.style.display = "block"; };
-              span.onclick = () => { addmodal.style.display = "none"; };
-              submitBtn.onclick = () => { addmodal.style.display = "none"; };
+                  window.onclick = (event) => {
+                    if (event.target == addmodal) {
+                      addmodal.style.display = "block";
+                    }
+                  };
+                </script>
+                <script>
+                  // edit appointment
+                  let editmodal = document.getElementById("editModal");
+                  let editspan = document.getElementsByClassName("editclose")[0];
 
-              window.onclick = (event) => {
-                if (event.target == addmodal) {
-                  addmodal.style.display = "block";
-                }
-              };
-            </script>
-            <script>
-              // edit appointment
-              let editmodal = document.getElementById("editModal");
+                  editspan.onclick = () => { editmodal.style.display = "none"; };
+                  submitBtn.onclick = () => { editmodal.style.display = "none"; };
 
-              let editspan = document.getElementsByClassName("editclose")[0];
-
-              editspan.onclick = () => { editmodal.style.display = "none"; };
-              submitBtn.onclick = () => { editmodal.style.display = "none"; };
-
-              window.onclick = (event) => {
-                if (event.target == editmodal) {
-                  editmodal.style.display = "block";
-                }
-              };
-
-            </script>
-     
-            <%# Display Developer %>
-              <footer>Jerry Galang - 2023 Backend Web Development</footer>
-
-              </html>
+                  window.onclick = (event) => {
+                    if (event.target == editmodal) {
+                      editmodal.style.display = "block";
+                    }
+                  };
+                </script>
+                <%# Display Developer %>
+                  <footer>Jerry Galang - 2023 Backend Web Development</footer>
+                  </html>

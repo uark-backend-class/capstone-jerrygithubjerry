@@ -1,7 +1,6 @@
 <%- include('./includes/head'); %>
   <%- include('./css/patients-view-style'); %>
     <title>Patient Records</title>
-
     <body class="body">
       <div class="btn-text-right">
         <form name="form1" method="get" action="/logout">
@@ -31,6 +30,7 @@
                   <th>Patient's Name</th>
                   <th>Address</th>
                   <th>Contact No.</th>
+                  <th>Email</th>
                   <th>Insurance</th>
                 </tr>
 
@@ -40,16 +40,19 @@
                     <td width="15%">
                       <%= patient.patient_name%>
                     </td>
-                    <td width="35%">
+                    <td width="25%">
                       <%= patient.patient_address%>
                     </td>
                     <td>
                       <%= patient.patient_phone%>
                     </td>
                     <td>
+                      <%= patient.patient_email%>
+                    </td>
+                    <td>
                       <%= patient.patient_insurance%>
                     </td>
-
+                
                     <form action="/patients/appointments/view/<%=patient.patient_id%>" method="GET">
                       <td width="5%" style="margin: center; width: 100px"><button type="submit" class="btn btn-info"> <svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">

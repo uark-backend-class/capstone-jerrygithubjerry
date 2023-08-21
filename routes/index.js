@@ -18,6 +18,7 @@ import { editPatientPage } from "../controllers/patients-update-controller.js";
 import { deletePatient } from "../controllers/patients-delete-controller.js";
 import { addPatient } from "../controllers/patients-add-controller.js";
 import { getAllPatientAppointments } from "../controllers/patients-getAllAppointments-controller.js";
+import { sendNotification } from "../controllers/appointments-notify-controller.js";
 
 const router = express.Router();
 
@@ -37,7 +38,8 @@ router.get("/appointments/hygienist/:hygienist_id/:appointment_date", getAllAppo
 router.get("/appointments/hygienist/:hygienist_id/:appointment_date/:appointment_id", getOneAppointment);
 router.post("/appointments/hygienist/:id", addAppointment);
 router.post("/appointments/:id", updateAppointment);
-router.post("/appointments/hygienist/:hygienist_id/:appointment_date/:appointment_id", deleteAppointment);
+router.post("/appointments/hygienist/delete/:hygienist_id/:appointment_date/:appointment_id", deleteAppointment);
+router.post("/appointments/hygienist/notify/:hygienist_id/:appointment_date/:appointment_id", sendNotification)
 
 // patient routes
 router.get("/patients/record", getAllPatients);
