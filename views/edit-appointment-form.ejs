@@ -30,19 +30,11 @@
         <br>
         Patient's Name:
         <br>
-        <select class="form-control form-control-sm" name="form_patient_id">
           <% for (let patient of patients) { %>
             <% if (patient.patient_id===currentAppt.patient_id) { %>
-              <option value='<%= currentAppt.patient_id %>' selected>
-                <%= patient.patient_name %>
-              </option>
-              <% } else { %>
-                <option value='<%= patient.patient_id %>'>
-                  <%= patient.patient_name %>
-                </option>
-                <% } %>
-                  <% } %>
-        </select>
+             <label><%= patient.patient_name %></label>
+           <% } %>  <% } %>
+        <br>      
         <br>
         Service:
         <br>
