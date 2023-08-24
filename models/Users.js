@@ -4,9 +4,9 @@ import bcrypt from "bcrypt";
 
 export const hygienistUser = async (username, password, done) => {
   try {
-    const dbResponse = await db.query('SELECT * FROM hygienists WHERE hygienist_name = $1', [username])
+    const dbResponse = await db.query('SELECT * FROM hygienists WHERE hygienist_name = $1 OR hygienist_email = $1', [username])
     const user = dbResponse.rows[0];
-    if (!user) {return done(null, false, { message: "No name found, please try again." }); }
+    if (!user) {return done(null, false, { message: "No name or email found, please try again." }); }
     if (user) {
       // compare entered password with hased DB password    
       const isMatch = await bcrypt.compare(password, user.hygienist_password, function(err, isMatch) {
